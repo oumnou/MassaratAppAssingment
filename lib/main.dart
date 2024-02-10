@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qssignment/post/post.dart';
 import 'package:qssignment/settings/settings.dart';
-
 import 'Search/search.dart';
+import 'model/postModel.dart';
 
 
 void main() {
@@ -110,7 +110,7 @@ class _MainAppState extends State<MainApp> {
                         itemBuilder: (context, innerIndex) {
                           final postIndex = index * displayCount + innerIndex;
                           if (postIndex < filteredPosts.length) {
-                            return _PostModel(
+                            return PostModel(
                               color: Colors.white,
                               post: filteredPosts[postIndex],
                               delete_post: () {
@@ -152,135 +152,3 @@ class _MainAppState extends State<MainApp> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class _PostModel extends StatefulWidget {
-
-
-  final Post post ;
-  final delete_post;
-  final Color color;
-
-  const _PostModel({super.key, required this.post, required this.delete_post, required this.color});
-
-  @override
-  State<_PostModel> createState() => __PostModelState();
-}
-
-class __PostModelState extends State<_PostModel> {
-  @override
-  Widget build(BuildContext context) {
-
-return Padding(
-  padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-  child: Card(
-    elevation: 3,
-    shadowColor: Colors.blue[100],
-    shape: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10), // Set the border radius here
-    ),
-    borderOnForeground: true,
-    color: Colors.grey[100],
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "ID: ${widget.post.id}",
-            style: const TextStyle(
-              fontSize: 10,
-              color: Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 1),
-          Text(
-            widget.post.title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () {
-                  _showMoreDialog(widget.post.body, widget.post.userId.toString());
-                },
-                icon: const Icon(Icons.more_horiz_outlined),
-              ),
-              IconButton(
-                onPressed: () {
-                  widget.delete_post();
-                },
-                icon: const Icon(Icons.delete),
-                color: Colors.red,
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
-  ),
-);
-
-    
-  }
-
-  void _showMoreDialog(String body, String id) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title:  Text('User ID :$id'),
-          content: Text(body),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.delete),
-              color: Colors.red,
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
