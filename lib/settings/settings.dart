@@ -42,8 +42,8 @@ class _SettingsPageState extends State<SettingsPage> {
             Slider(
               value: _displayCount.toDouble(),
               min: 1,
-              max: 10,
-              divisions: 9,
+              max: 100,
+              divisions: 99,
               label: _displayCount.toString(),
               onChanged: (value) {
                 setState(() {
