@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-
 import '../post/post.dart';
 
-class _PostModelState extends StatefulWidget {
+class _PostModel extends StatefulWidget {
 
 
   final Post post ;
-  const _PostModelState({super.key, required this.post});
+  final delete_post;
+
+  const _PostModel({super.key, required this.post, required this.delete_post});
 
   @override
-  State<_PostModelState> createState() => __PostModelStateState();
+  State<_PostModel> createState() => __PostModelState();
 }
 
-class __PostModelStateState extends State<_PostModelState> {
+class __PostModelState extends State<_PostModel> {
   @override
   Widget build(BuildContext context) {
 
@@ -37,9 +38,7 @@ return  Padding(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    // Delete button functionality can be added here
-                  },
+                  onPressed: (){ widget.delete_post();},
                   child: const Text("Delete"),
                 ),
                 ElevatedButton(
