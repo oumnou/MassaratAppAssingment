@@ -25,6 +25,7 @@ class _MainAppState extends State<MainApp> {
   int pageIndex = 0; 
 
   late List<Post> posts = [];
+  late List<Post> filteredPosts = [];
 
   bool isLoading = true;
 
@@ -57,7 +58,11 @@ class _MainAppState extends State<MainApp> {
     getPosts();
   }
 
-
+  void searchFunction(String query) {
+    setState(() {
+      filteredPosts = posts.where((post) => post.title.toLowerCase().contains(query.toLowerCase())).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
